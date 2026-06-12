@@ -1,8 +1,5 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -27,42 +24,28 @@ public class Main {
      */
     public static void salesReport() {
 
-        // 1. Создаём HashMap с товарами и суммой продаж по каждому товару
-        HashMap<String, Integer> sales = new HashMap<>();
-        sales.put("Хлеб", 120);
-        sales.put("Молоко", 85);
-        sales.put("Сыр", 300);
-        sales.put("Яблоки", 150);
-        sales.put("Кофе", 250);
+        // всё взаимодействие с map теперь внутри класса SalesReport (задание 7)
+        SalesReport report = new SalesReport();
 
-        // 2. Итерация по HashMap (шаблон iter из IDEA), вывод по каждому товару
-        for (Map.Entry<String, Integer> entry : sales.entrySet()) {
-            System.out.println("Товар: " + entry.getKey() + " :: Сумма продаж: " + entry.getValue());
-        }
+        // добавляем продажи по товарам
+        report.addSale("Хлеб", 120);
+        report.addSale("Молоко", 85);
+        report.addSale("Сыр", 300);
+        report.addSale("Яблоки", 150);
+        report.addSale("Кофе", 250);
 
-        // 3. Добавляем новую позицию по названию
-        sales.put("Чай", 90);
+        // продали ещё хлеба — прибавится к существующей позиции
+        report.addSale("Хлеб", 60);
+        // новая позиция
+        report.addSale("Чай", 90);
 
-        // 4. Модифицируем существующую позицию по названию (прибавление и вычитание)
-        sales.put("Хлеб", sales.get("Хлеб") + 60);     // продали ещё хлеба
-        sales.put("Молоко", sales.get("Молоко") - 25); // часть молока вернули
+        // вернули часть молока — вычитаем из отчёта
+        report.subtractSale("Молоко", 25);
 
-        // 5. Удаляем позицию по названию
-        sales.remove("Яблоки");
+        // позицию внесли ошибочно — удаляем
+        report.removePosition("Яблоки");
 
-        // 6. containsKey возвращает true, если такой ключ есть в map, иначе false.
-        //    Удобно проверять наличие позиции перед изменением, чтобы не словить NullPointerException на get().
-        if (sales.containsKey("Сыр")) {
-            sales.put("Сыр", sales.get("Сыр") + 100);
-        }
-        if (!sales.containsKey("Колбаса")) {
-            System.out.println("Позиции \"Колбаса\" в отчёте нет, изменять нечего");
-        }
-
-        // Итоговый отчёт после изменений
-        System.out.println("--- Отчёт после изменений ---");
-        for (Map.Entry<String, Integer> entry : sales.entrySet()) {
-            System.out.println("Товар: " + entry.getKey() + " :: Сумма продаж: " + entry.getValue());
-        }
+        // отчёт по продажам (переопределённый toString)
+        System.out.println(report);
     }
 }
