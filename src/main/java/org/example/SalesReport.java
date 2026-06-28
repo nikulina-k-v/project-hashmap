@@ -38,30 +38,5 @@ public class SalesReport {
         for (Map.Entry<String, Integer> entry : sales.entrySet()) {
             System.out.println("Товар: " + entry.getKey() + " :: Сумма продаж: " + entry.getValue());
         }
-
-        // 3. Добавляем новую позицию по названию
-        sales.put("Чай", 90);
-
-        // 4. Модифицируем существующую позицию по названию (прибавление и вычитание)
-        sales.put("Хлеб", sales.get("Хлеб") + 60);     // продали ещё хлеба
-        sales.put("Молоко", sales.get("Молоко") - 25); // часть молока вернули
-
-        // 5. Удаляем позицию по названию
-        sales.remove("Яблоки");
-
-        // 6. containsKey возвращает true, если такой ключ есть в map, иначе false.
-        //    Удобно проверять наличие позиции перед изменением, чтобы не словить NullPointerException на get().
-        if (sales.containsKey("Сыр")) {
-            sales.put("Сыр", sales.get("Сыр") + 100);
-        }
-        if (!sales.containsKey("Колбаса")) {
-            System.out.println("Позиции \"Колбаса\" в отчёте нет, изменять нечего");
-        }
-
-        // Итоговый отчёт после изменений
-        System.out.println("--- Отчёт после изменений ---");
-        for (Map.Entry<String, Integer> entry : sales.entrySet()) {
-            System.out.println("Товар: " + entry.getKey() + " :: Сумма продаж: " + entry.getValue());
-        }
     }
 }
