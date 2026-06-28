@@ -3,11 +3,7 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
-
-    public static void main(String[] args) {
-        salesReport();
-    }
+public class SalesReport {
 
     /**
      * Отчет продаж магазина (вставте данный текст себе IDEA) над методом<p>
@@ -25,16 +21,19 @@ public class Main {
      * - отчет по продажам (переопределить метод toString которвый выведет позицию и числовое значение)<p>
      * *- опционально добавье возможность хранения удаленных и вовзратов по позициям товаров в отчет toString <p>
      */
-    public static void salesReport() {
 
-        // 1. Создаём HashMap с товарами и суммой продаж по каждому товару
-        HashMap<String, Integer> sales = new HashMap<>();
-        sales.put("Хлеб", 120);
-        sales.put("Молоко", 85);
-        sales.put("Сыр", 300);
-        sales.put("Яблоки", 150);
-        sales.put("Кофе", 250);
+    // 1. Создаём HashMap с товарами и суммой продаж по каждому товару
+    private final HashMap<String, Integer> sales = new HashMap<>();
 
+    public HashMap<String, Integer> getSalesMap() {
+        return sales;
+    }
+
+    public void addSaleToMap(String item, Integer sum) {
+        sales.put(item, sum);
+    }
+
+    public static void printSalesReport(HashMap<String, Integer> sales) {
         // 2. Итерация по HashMap (шаблон iter из IDEA), вывод по каждому товару
         for (Map.Entry<String, Integer> entry : sales.entrySet()) {
             System.out.println("Товар: " + entry.getKey() + " :: Сумма продаж: " + entry.getValue());
